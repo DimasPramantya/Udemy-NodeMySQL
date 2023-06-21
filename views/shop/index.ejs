@@ -1,0 +1,34 @@
+<%- include('../includes/header.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <% if(products.length>0) { %>
+        <main class="flex-row justify-center">
+            <% for(let product of products) {%>
+                <div class="flex-col w-18 shadow-md rounded-lg mx-4">
+                    <div class="bold text-lg w-full flex justify-center items-center p-3 flex-row justify-center w-full">
+                        <h2><%= product.title %></h2>
+                    </div>
+                    <div class="w-full mb-4">
+                        <img src="<%= product.imageUrl %>" alt="book" class="w-full object-cover h-14">
+                    </div>
+                    <div class="w-full mb-2 text-xl flex-row justify-center w-full">
+                        <div class="bold">$<%= product.price %></div>
+                    </div>
+                    <div class="w-full mb-4 flex-row justify-center w-full">
+                        <div class="text-center"><%= product.description %></div>
+                    </div>
+                    <div class="mb-4 flex-row justify-center w-full">
+                        <form action="/cart" method="post">
+                            <button type="submit" class="submit-form">Add to Cart</button>
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="productPrice" value="<%= product.price %>">
+                        </form>
+                    </div>
+                </div>
+                <% } %>  
+        </main>
+    <% } else{ %> 
+        <h1>Product Not Found</h1>
+    <% } %>  
+</body>
+</html>

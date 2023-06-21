@@ -1,0 +1,343 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.main-header{
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    background-color: rgb(6, 146, 95);
+}
+
+.main-nav{
+    margin: 0 30px;
+}
+
+.nav-list{
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-item{
+    margin: 0 25px;
+}
+
+.nav-item a{
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item a:hover{
+    color: rgb(174, 174, 13);
+}
+
+main{
+    padding: 20px 50px;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;  
+}
+
+
+.p-4{
+    padding: 1rem;
+}
+
+.p-3{
+    padding: 0.75rem;
+}
+
+.p-2{
+    padding: 0.5rem;
+}
+
+.p-5{
+    padding: 1.25rem;
+}
+.border-bottom{
+    border-bottom: 1px solid rgba(0,0,0,.4);
+}
+
+.flex-col h2{
+    padding: 10px;
+}
+
+.flex-col-center{
+    align-items: center;
+}
+
+.flex-col-center h1:first-child{
+    margin-bottom: 10px;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.w-full{
+    width: 100%;
+}
+
+.w-18{
+    width: 18rem;
+}
+
+.object-cover{
+    object-fit: cover;
+}
+
+.items-center{
+    align-items: center;
+}
+
+.shadow-md{
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.rounded-lg{
+    border-radius: 0.5rem;
+}
+
+.mb-4{
+    margin-bottom: 1rem;
+}
+
+.mb-2{
+    margin-bottom: 0.5rem;
+}
+
+.mb-6{
+    margin-bottom: 1.5rem;
+}
+
+.mb-8{
+    margin-bottom: 2rem;
+}
+
+.mb-10{
+    margin-bottom: 2.5rem;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-green{
+    color: green;
+}
+
+.border-green{
+    border: 1px solid green;
+}
+
+.rounded-md{
+    border-radius: 0.25rem;
+}
+
+.mx-4{
+    margin: 0 1rem;
+}
+
+.block{
+    display: block;
+}
+
+.w-30p{
+    width: 30%;
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Add space between this form group and the next */
+  }
+  
+.form-group label {
+display: block; /* Set the label display property to block */
+color: #333; /* Set the label text color */
+font-size: 14px; /* Set the label font size */
+font-weight: bold; /* Set the label font weight */
+margin-bottom: 0.25rem; /* Add space between the label and the input */
+}
+  
+.form-group input {
+display: block; /* Set the input display property to block */
+width: 100%; /* Set the input width to 100% of its container */
+padding: 0.5rem 0.75rem; /* Add vertical and horizontal padding to the input */
+font-size: 14px; /* Set the input font size */
+color: #333; /* Set the input text color */
+border: 1px solid #ccc; /* Add a border to the input */
+border-radius: 4px; /* Round the corners of the input */
+line-height: 1.5; /* Set the line height to reduce vertical spacing between lines */
+}
+  
+.form-group input:focus {
+outline: none; /* Remove the focus outline when the input is selected */
+box-shadow: 0 0 0 2px #b3d4fc; /* Add a shadow outline when the input is selected */
+}
+
+.submit-form{
+  background-color: #007bff; /* Set the background color of the button */
+  color: #fff; /* Set the text color of the button */
+  font-weight: bold; /* Set the font weight of the button text */
+  padding: 0.5rem 1rem; /* Set the vertical and horizontal padding of the button */
+  border: none; /* Remove the border of the button */
+  border-radius: 4px; /* Round the corners of the button */
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+}
+
+.submit-form:hover {
+    background-color: #0069d9; /* Set the background color of the button when hovered over */
+}
+
+.text-xl{
+    font-size: 1.25rem;
+}
+
+.text-xs{
+    font-size: 0.5rem;
+}
+
+.text-sm{
+    font-size: 0.875rem;
+}
+
+.btn-edit{
+  background-color: white; /* Set the background color of the button */
+  color: #D97706; /* Set the text color of the button */
+  font-weight: bold; /* Set the font weight of the button text */
+  padding: 0.5rem 1rem; /* Set the vertical and horizontal padding of the button */
+  border: 1px solid #D97706; /* Remove the border of the button */
+  border-radius: 4px; /* Round the corners of the button */
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+  text-decoration: none;
+}
+
+.btn-edit:hover {
+    background-color: #D97706; /* Set the background color of the button when hovered over */
+    border: none;
+    color: white;
+}
+
+.btn-delete{
+    background-color: white; /* Set the background color of the button */
+    color: #EF4444; /* Set the text color of the button */
+    font-weight: bold; /* Set the font weight of the button text */
+    padding: 0.5rem 1rem; /* Set the vertical and horizontal padding of the button */
+    border: 1px solid #EF4444; /* Remove the border of the button */
+    border-radius: 4px; /* Round the corners of the button */
+    cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+    text-decoration: none;
+  }
+  
+.btn-delete:hover {
+      background-color: #EF4444; /* Set the background color of the button when hovered over */
+      border: none;
+      color: white;
+}
+
+.btn-green{
+    background-color: white; /* Set the background color of the button */
+    color: green; /* Set the text color of the button */
+    font-weight: bold; /* Set the font weight of the button text */
+    padding: 0.5rem 1rem; /* Set the vertical and horizontal padding of the button */
+    border: 1px solid green; /* Remove the border of the button */
+    border-radius: 4px; /* Round the corners of the button */
+    cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
+    text-decoration: none;
+  }
+  
+.btn-green:hover {
+      background-color: green; /* Set the background color of the button when hovered over */
+      border: none;
+      color: white;
+      text-decoration: none;
+}
+
+.mr-4{
+    margin-right: 1rem;
+}
+
+.mr-2{
+    margin-right: 0.5rem;
+}
+
+.h-14{
+    height: 14rem;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.justify-around{
+    justify-content: space-around;
+}
+
+.w-50p{
+    width: 50%;
+}
+
+.w-30p{
+    width: 30%;
+}
+
+.mx-30p{
+    margin: 0 30%;
+}
+
+.grid{
+    display: grid;
+}
+
+.grid-cols-6{
+    grid-template-columns: auto auto auto auto auto auto;
+}
+
+.col-3{
+    grid-column: 1 / 4;
+}
+
+.col-5{
+    grid-column: 1 / 5;
+}
+
+.py-4{
+    padding: 2rem 0;
+}
+
+.mx-auto{
+    margin: 0 auto;
+}
+
+.p-auto{
+    padding: auto;
+}
+
+.border-bottom{
+    border-bottom: 1px solid #000;
+}
+
+.py-1{
+    padding: .5rem 0;
+}
+
+.text-end{
+    text-align: end;
+}
+
+.pr-1{
+    padding-right: 1rem;
+}

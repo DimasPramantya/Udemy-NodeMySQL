@@ -1,0 +1,28 @@
+<%- include('../includes/header.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main class="flex-col">
+        <div class="mb-2 flex-row justify-center">
+            <h1><%= product.title %></h1>
+        </div>
+        <hr class="mb-4">
+        <div class="flex-row justify-center">        
+            <img src="<%= product.imageUrl %>" alt="<= product.title %>" class="w-18 h-18 object-cover rounded-lg">
+        </div>
+        <div class="flex-row justify-center">        
+            <h2>$<%= product.price %></h2>
+        </div>
+        <div class="mb-4 flex-row justify-center">        
+            <p><%= product.description %></p>
+        </div>
+        <div class="flex-row justify-center">
+            <form action="/cart" method="post" class="flex-row justify-center">
+                <button type="submit" class="submit-form mx-auto">Add to cart</button>
+                <input type="hidden" name="productId" value="<%= product.id %>">
+                <input type="hidden" name="productTitle" value="<%= product.title %>">
+                <input type="hidden" name="productPrice" value="<%= product.price %>">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

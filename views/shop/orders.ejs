@@ -1,0 +1,22 @@
+<%- include('../includes/header.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <% if(products!==null) { let totalPrice = 0%>
+            <div class="grid grid-cols-6 w-50p mx-auto mb-4">
+                <div class="col-3 bold py-1 border-bottom">Product Name</div>
+                <div class="text-center py-1 bold border-bottom">Quantity</div>
+                <div class="text-center py-1 bold border-bottom">Price</div>
+                    <% products.forEach((item)=>{ totalPrice += (item.price * item.orderItem.prodQuantity)%>
+                        <div class="col-3 py-1 flex-row items-center border-bottom"><%= item.title %></div>
+                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.orderItem.prodQuantity %></div>
+                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.price %></div>
+                    <% }) %>
+                <div class="col-5 text-end pr-1 py-1 bold">Total :</div>
+                <div class="text-center py-1 bold">$<%= totalPrice %></div>
+            </div>
+        <% } else { %>
+        <% } %>
+    </main>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<%- include('../includes/header.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <% if(products!==null) { let totalPrice = 0%>
+            <div class="grid grid-cols-6 w-50p mx-auto mb-4">
+                <div class="col-3 bold py-1 border-bottom">Product Name</div>
+                <div class="text-center py-1 bold border-bottom">Quantity</div>
+                <div class="text-center py-1 bold border-bottom">Price</div>
+                <div class="text-center py-1 bold border-bottom">Action</div>
+                    <% products.forEach((item)=>{ totalPrice += (item.price * item.cartItem.prodQuantity)%>
+                        <div class="col-3 py-1 flex-row items-center border-bottom"><%= item.title %></div>
+                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.cartItem.prodQuantity %></div>
+                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.price %></div>
+                        <div class="text-center py-1 border-bottom">
+                            <form action="/delete-cart-item" method="post">
+                                <input type="hidden" name="productId" value=<%= item.id %>>
+                                <input type="hidden" name="productPrice" value=<%= item.price %>>
+                                <button type="submit" class="btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    <% }) %>
+                <div class="col-5 text-end pr-1 py-1 bold">Total :</div>
+                <div class="text-center py-1 bold">$<%= totalPrice %></div>
+            </div>
+            <div class="flex-row justify-center">
+                <form action="/create-order" method="post">
+                    <button type="submit" class="submit-form mx-auto">Order now!</button>
+                </form>
+            </div>
+        <% } else { %>
+        <% } %>
+    </main>
+</body>
+</html>
