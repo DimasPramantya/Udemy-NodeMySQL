@@ -18,7 +18,7 @@
                         <div class="text-center"><%= product.description %></div>
                     </div>
                     <div class="mb-4 flex-row justify-center w-full">
-                        <a href="/product/<%= product.id %>" class="btn-green mr-2 text-sm">Product Detail</a>
+                        <a href="/product/<%= product._id %>" class="btn-green mr-2 text-sm">Product Detail</a>
                         <form action="/cart" method="post">
                             <button type="submit" class="submit-form text-sm">Add to Cart</button>
                             <input type="hidden" name="productId" value="<%= product.id %>">

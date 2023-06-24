@@ -12,8 +12,8 @@ const getAddProduct = (req,res,next)=>{
 }
 
 const getProducts = (req,res,next)=>{
-    const loggedUser = req.user;
-    loggedUser.getProducts()
+    // const loggedUser = req.user;
+    Product.fetchAll()
         .then(products=>{
             res.render("admin/products",{products, pageTitle: "Admin Products"});
         })
@@ -25,14 +25,10 @@ const getProducts = (req,res,next)=>{
 const getEditProducts = (req,res,next)=>{
     const {productId} = req.params;
     const editMode = Boolean(req.query.edit);
-    const loggedUser = req.user;
-    loggedUser.getProducts({
-        where:{
-            id:productId
-        }
-    })
+    // const loggedUser = req.user;
+    Product.fetchOne(productId)
     .then(product=>{
-        res.render("admin/edit-product",{pageTitle: "Add Product", product: product[0], editMode})
+        res.render("admin/edit-product",{pageTitle: "Edit Product", product, editMode})
     })
 }
 
@@ -41,19 +37,15 @@ const postAddProduct = (req,res,next)=>{
     const price = req.body.price;
     const description = req.body.description;
     const imageUrl = req.body.imageUrl;
-    const loggedUser = req.user;
-    loggedUser.createProduct({
-        title,
-        price,
-        description,
-        imageUrl
-    })
-   .then(()=>{
-        console.log('Product Created');
-        res.redirect("/");
-    }).catch((err)=>{
-        console.log(err);
-    })
+    const product  = new Product(title, price, description, imageUrl);
+    product.save()
+        .then(result=>{
+            console.log(result);
+            res.redirect("/");
+        })
+        .catch(err=>{
+            console.log(err);
+        })
 }
 
 const postEditProduct = (req,res,next)=>{
@@ -62,16 +54,8 @@ const postEditProduct = (req,res,next)=>{
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    Product.update({
-        title,
-        price,
-        imageUrl,
-        description
-    }, {
-        where:{
-            id:productId
-        }
-    })
+    const product = new Product(title,price,description,imageUrl, productId);
+    product.save()
     .then(result=>{
         console.log("Product is updated");
         res.redirect("/");
@@ -83,9 +67,8 @@ const postEditProduct = (req,res,next)=>{
 
 const deleteProduct = (req,res,next)=>{
     const {productId} = req.body;
-    Product.findByPk(productId)
-    .then((product)=>{
-        product.destroy();
+    Product.delete(productId)
+    .then(()=>{
         res.redirect("/")
     })
     .catch(err=>{

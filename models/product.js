@@ -1,30 +1,82 @@
-const Sequelize = require('sequelize');
+const { ObjectId } = require('mongodb');
+const {getDb} = require('../utils/db');
 
-const sequelize = require('../utils/db');
-
-const Product = sequelize.define('product',{
-    id:{
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
-    },
-    title:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    price:{
-        type: Sequelize.DOUBLE,
-        allowNull: false
-    },
-    description:{
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    imageUrl:{
-        type: Sequelize.STRING,
-        allowNull: false
+class Product{
+    constructor(title,price,description,imageUrl, id){
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        if(id){
+            console.log(id);
+            this._id = new ObjectId(id);
+        }
     }
-})
+
+    save(){
+        const db = getDb();
+        let dbOp;
+        if(this._id){
+            dbOp = db.collection('products').updateOne({_id: this._id},{$set: this});
+        }else{
+            dbOp = db.collection('products').insertOne(this);
+        }
+        return(
+            dbOp
+            .then(result=>{
+                console.log(result);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        )
+    }
+
+    static fetchAll(){
+        const db = getDb();
+        return(
+            db.collection('products').find().toArray()
+                .then(products=>{
+                    return products;
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+        )
+    }
+
+    static fetchOne(id){
+        const db = getDb();
+        id = new ObjectId(id);
+        return(
+            db.collection('products').find({_id:id}).next()
+            .then(product=>{
+                return product;
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+        )
+    }
+
+    update(id){
+        const db = getDb();
+        id = new ObjectId(id);
+        return(
+            db.collection('products').updateOne({
+                _id: id
+            },{
+                $set:{
+                    title: this.title, 
+                    price: this.price, 
+                    imageUrl: this.imageUrl, 
+                    description: this.description
+                }
+            }).catch(err=>{
+                console.log(err);
+            })
+        )
+    }
+}
 
 module.exports = Product
