@@ -24,21 +24,16 @@ const getIndex = (req,res,next)=>{
         })
 }
 
-// const getCart = (req,res,next)=>{
-//     const loggedUser = req.user;
-//     loggedUser.getCart()
-//         .then(cart=>{
-//             if(cart){
-//                 return cart.getProducts();
-//             }
-//             return null;
-//         }).then(products=>{
-//             res.render("shop/cart",{
-//                 pageTitle: "Cart",
-//                 products
-//             })
-//         })
-// }
+const getCart = (req,res,next)=>{
+    req.user.getCart()
+    .then(products=>{
+        console.log(products);
+        res.render("shop/cart",{
+            pageTitle: "Cart",
+            products
+        })
+    })
+}
 
 // const getOrders = (req,res,next)=>{
 //     const loggedUser = req.user;
@@ -76,26 +71,20 @@ const getProductDetail = (req,res,next)=>{
 }
 
 
-// const postCart = (req,res,next)=>{
-//     const loggedUser = req.user;
-//     const prodId = req.body.productId;
-//     Promise.all([loggedUser.getCart(), Product.findOne({where:{id:prodId}}),CartItem.findOne({where:{productId:prodId}})])
-//         .then(([cart, product, cartItem])=>{
-//             let newQuantity = 1;
-//             if(cartItem){
-//                 newQuantity++;
-//                 return cartItem.update({
-//                     prodQuantity: newQuantity
-//                 })
-//             }
-//             return cart.addProduct(product, { through: { prodQuantity: newQuantity} })
-//         }).then((result)=>{
-//             res.redirect("/cart")
-//         })
-//         .catch(err=>{
-//             console.log(err);
-//         })
-// }
+const postCart = (req,res,next)=>{
+    const productId = req.body.productId;
+    Product.fetchOne(productId)
+    .then(product=>{
+        req.user.addToCart(product, req.user.cart)
+        .then(result=>{
+            console.log(result);
+            res.redirect("/");
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    })
+}
 
 // const deleteCartItem = (req,res,next)=>{
 //     const productId = req.body.productId;
@@ -138,12 +127,12 @@ const getProductDetail = (req,res,next)=>{
 
 module.exports = {
     getProducts, 
-    // getCart, 
+    getCart, 
     getIndex, 
     // getCheckout, 
     // getOrders, 
     getProductDetail, 
-    // postCart, 
+    postCart, 
     // deleteCartItem,
     // postOrder
 };

@@ -21,8 +21,7 @@
                         <a href="/product/<%= product._id %>" class="btn-green mr-2 text-sm">Product Detail</a>
                         <form action="/cart" method="post">
                             <button type="submit" class="submit-form text-sm">Add to Cart</button>
-                            <input type="hidden" name="productId" value="<%= product.id %>">
-                            <input type="hidden" name="productPrice" value="<%= product.price %>">
+                            <input type="hidden" name="productId" value="<%= product._id %>">
                         </form>
                     </div>
                 </div>

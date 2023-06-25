@@ -37,7 +37,7 @@ const postAddProduct = (req,res,next)=>{
     const price = req.body.price;
     const description = req.body.description;
     const imageUrl = req.body.imageUrl;
-    const product  = new Product(title, price, description, imageUrl);
+    const product  = new Product(title, price, description, imageUrl, req.user._id, null);
     product.save()
         .then(result=>{
             console.log(result);
@@ -54,7 +54,7 @@ const postEditProduct = (req,res,next)=>{
     const price = req.body.price;
     const imageUrl = req.body.imageUrl;
     const description = req.body.description;
-    const product = new Product(title,price,description,imageUrl, productId);
+    const product = new Product(title,price,description,imageUrl, productId, req.user._id, null);
     product.save()
     .then(result=>{
         console.log("Product is updated");

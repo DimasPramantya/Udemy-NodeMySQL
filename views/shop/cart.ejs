@@ -8,9 +8,9 @@
                 <div class="text-center py-1 bold border-bottom">Quantity</div>
                 <div class="text-center py-1 bold border-bottom">Price</div>
                 <div class="text-center py-1 bold border-bottom">Action</div>
-                    <% products.forEach((item)=>{ totalPrice += (item.price * item.cartItem.prodQuantity)%>
+                    <% products.forEach((item)=>{ totalPrice += (parseInt(item.price) * item.quantity)%>
                         <div class="col-3 py-1 flex-row items-center border-bottom"><%= item.title %></div>
-                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.cartItem.prodQuantity %></div>
+                        <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.quantity %></div>
                         <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.price %></div>
                         <div class="text-center py-1 border-bottom">
                             <form action="/delete-cart-item" method="post">

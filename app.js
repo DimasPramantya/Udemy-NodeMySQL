@@ -9,24 +9,22 @@ const adminRoutes = require("./routes/admin");
 const notFound = require("./middleware/404");
 const errorController = require('./controllers/error')
 
+const User = require('./models/user')
+
 const app = express();
 
 app.set("view engine","ejs");
 
 app.use((req,res,next)=>{
-    // User.findOne({where: {id:1}})
-    //     .then(user=>{
-    //         if(user){
-    //             req.user = user;
-    //             return user.getCart()
-    //         }
-    //     }).then(cart=>{
-    //         if(!cart){
-    //             req.user.createCart()
-    //         }
-    //         next();
-    //     })
-    next();
+    User.findById("6496ab10e7be8ba487982d10")
+        .then(user=>{
+            if(user){
+                req.user = new User(user.name, user.email, user.cart, user._id);
+                next();
+            }
+        }).catch(err=>{
+            console.log(err);
+    })
 })
 
 app.use(bodyParser.urlencoded({extended:false}));
