@@ -14,8 +14,7 @@
                         <div class="text-center py-1 flex-row items-center justify-center border-bottom"><%= item.price %></div>
                         <div class="text-center py-1 border-bottom">
                             <form action="/delete-cart-item" method="post">
-                                <input type="hidden" name="productId" value=<%= item.id %>>
-                                <input type="hidden" name="productPrice" value=<%= item.price %>>
+                                <input type="hidden" name="productId" value=<%= item._id %>>
                                 <button type="submit" class="btn-delete">Delete</button>
                             </form>
                         </div>

@@ -67,12 +67,9 @@ const postEditProduct = (req,res,next)=>{
 
 const deleteProduct = (req,res,next)=>{
     const {productId} = req.body;
-    Product.delete(productId)
+    Promise.all([Product.delete(productId), req.user.removeCartItem(productId)])
     .then(()=>{
-        res.redirect("/")
-    })
-    .catch(err=>{
-        console.log(err);
+        res.redirect("/");
     })
 }
 

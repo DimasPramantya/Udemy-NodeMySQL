@@ -42,6 +42,21 @@ class User{
         )
     }
 
+    removeCartItem(productId){
+        productId = new ObjectId(productId);
+        const cartProdId = this.cart.items.findIndex(e=>{
+            return productId.toString() === e.productId.toString();
+        })
+        if(cartProdId===-1){
+            return;
+        }
+        const db = getDb();
+        this.cart.items.splice(cartProdId,1);
+        return(
+            db.collection('users').updateOne({_id:this.id},{$set: {cart: this.cart}})
+        )
+    }
+
     getCart(){
         const productIds = this.cart.items.map(e=>{
             return e.productId;
@@ -55,6 +70,39 @@ class User{
                         return e.productId.toString() === product._id.toString();
                     }).quantity}
                 })
+            })
+        )
+    }
+
+    addOrder(){
+        const db = getDb();
+        this.getCart()
+        .then(products=>{
+            const order = {
+                items: products,
+                user:{
+                    _id: this.id,
+                    username: this.name 
+                }
+            };
+            return db.collection('orders').insertOne(order)
+        }).then((result)=>{
+            this.cart.items = [];
+            return db.collection('users').updateOne({_id: this.id},{$set: {cart: this.cart}});
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+    getOrders(){
+        const db = getDb();
+        return(
+            db.collection('orders').find({"user._id": this.id}).toArray()
+            .then(orders=>{
+                return orders;
+            })
+            .catch(err=>{
+                console.log(err);
             })
         )
     }
